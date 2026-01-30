@@ -102,29 +102,31 @@ const statsObserver = new IntersectionObserver((entries) => {
 
 statsObserver.observe(heroSection);
 
-// ===== Publication Filters =====
-const filterBtns = document.querySelectorAll('.filter-btn');
-const publications = document.querySelectorAll('.publication-item');
+// ===== Fetch GitHub Stars =====
+async function fetchGitHubStars() {
+    const repoLinks = document.querySelectorAll('.pub-link[data-repo]');
 
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    for (const link of repoLinks) {
+        const repo = link.getAttribute('data-repo');
+        const starsSpan = link.querySelector('.github-stars');
 
-        const filter = btn.getAttribute('data-filter');
-
-        publications.forEach(pub => {
-            if (filter === 'all') {
-                pub.classList.remove('hidden');
-            } else if (pub.classList.contains(filter)) {
-                pub.classList.remove('hidden');
-            } else {
-                pub.classList.add('hidden');
+        if (repo && starsSpan) {
+            try {
+                const response = await fetch(`https://api.github.com/repos/${repo}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const stars = data.stargazers_count;
+                    starsSpan.textContent = stars >= 1000 ? (stars / 1000).toFixed(1) + 'k' : stars;
+                }
+            } catch (error) {
+                console.log(`Could not fetch stars for ${repo}`);
             }
-        });
-    });
-});
+        }
+    }
+}
+
+// Fetch stars on page load
+document.addEventListener('DOMContentLoaded', fetchGitHubStars);
 
 // ===== Smooth Scroll for Navigation Links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

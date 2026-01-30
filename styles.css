@@ -870,7 +870,25 @@ body {
 .venue-badge.eccv { background: linear-gradient(135deg, #f59e0b, #eab308); color: white; }
 .venue-badge.iclr { background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; }
 .venue-badge.corl { background: linear-gradient(135deg, #ec4899, #8b5cf6); color: white; }
+.venue-badge.tpami { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; }
 .venue-badge.arxiv { background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border-color); }
+
+/* GitHub Stars */
+.github-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: 0.25rem;
+    font-size: 0.75rem;
+    color: #f59e0b;
+}
+
+.github-stars::before {
+    content: '\f005';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.65rem;
+}
 
 .venue-type {
     font-size: 0.7rem;
