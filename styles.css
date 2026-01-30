@@ -27,6 +27,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -167,6 +168,19 @@ body {
     height: 2px;
     background: var(--text-primary);
     transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ===== Hero Section ===== */
@@ -445,15 +459,13 @@ body {
 
 /* Scroll Indicator */
 .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: auto;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    animation: fadeIn 1s ease 1s forwards, bounce 2s ease-in-out infinite 1.5s;
+    animation: fadeIn 1s ease 1s forwards, bounceY 2s ease-in-out infinite 1.5s;
     opacity: 0;
 }
 
@@ -489,15 +501,17 @@ body {
     50% { top: 20px; opacity: 0.5; }
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(10px); }
+@keyframes bounceY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
 }
 
 /* ===== Sections Common ===== */
 .section {
     padding: 6rem 2rem;
     position: relative;
+    z-index: 1;
+    background: var(--bg-primary);
 }
 
 .container {
@@ -1175,10 +1189,11 @@ body {
     .nav-links {
         display: none;
         position: fixed;
-        top: 70px;
+        top: 60px;
         left: 0;
         right: 0;
-        background: var(--bg-primary);
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 2rem;
         gap: 1.5rem;
@@ -1208,10 +1223,30 @@ body {
     .hero-stats {
         flex-direction: column;
         gap: 1.5rem;
+        align-items: center;
     }
 
     .hero-buttons {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 280px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .section {
+        padding: 4rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
     }
 
     .experience-grid {
@@ -1220,7 +1255,22 @@ body {
 
     .publication-item {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.75rem;
+        padding: 1.25rem;
+    }
+
+    .pub-venue {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .pub-content h3 {
+        font-size: 1rem;
+    }
+
+    .pub-links {
+        flex-wrap: wrap;
+        gap: 0.5rem;
     }
 
     .service-grid {
@@ -1229,6 +1279,77 @@ body {
 
     .contact-cards {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+    }
+
+    .contact-card {
+        padding: 1.5rem;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .contact-card i {
+        font-size: 1.5rem;
+    }
+
+    .contact-card span {
+        font-size: 0.85rem;
+        word-break: break-all;
+    }
+}
+
+/* ===== Very Small Screens ===== */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .navbar.scrolled {
+        padding: 0.5rem 1rem;
+    }
+
+    .hero {
+        padding: 5rem 1rem 2rem;
+    }
+
+    .name {
+        font-size: 2rem;
+    }
+
+    .name-cn {
+        font-size: 1.5rem;
+    }
+
+    .title-wrapper {
+        font-size: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+    }
+
+    .experience-card {
+        padding: 1.5rem;
+    }
+
+    .publication-item {
+        padding: 1rem;
+    }
+
+    .service-card {
+        padding: 1.5rem;
+    }
+
+    .nav-links {
+        top: 50px;
     }
 }

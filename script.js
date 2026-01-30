@@ -210,56 +210,53 @@ linkStyle.textContent = `
 `;
 document.head.appendChild(linkStyle);
 
-// ===== Parallax Effect for Hero =====
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero-content');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-        hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
-    }
-});
+// ===== Device Detection =====
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-// ===== Cursor Glow Effect =====
-const cursorGlow = document.createElement('div');
-cursorGlow.className = 'cursor-glow';
-cursorGlow.style.cssText = `
-    position: fixed;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
-`;
-document.body.appendChild(cursorGlow);
+// ===== Cursor Glow Effect (desktop only) =====
+if (!isTouchDevice) {
+    const cursorGlow = document.createElement('div');
+    cursorGlow.className = 'cursor-glow';
+    cursorGlow.style.cssText = `
+        position: fixed;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease;
+    `;
+    document.body.appendChild(cursorGlow);
 
-document.addEventListener('mousemove', (e) => {
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
-});
-
-// ===== Card Tilt Effect =====
-const cards = document.querySelectorAll('.experience-card, .service-card');
-
-cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
     });
+}
 
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+// ===== Card Tilt Effect (desktop only) =====
+if (!isTouchDevice) {
+    const cards = document.querySelectorAll('.experience-card, .service-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
     });
-});
+}
 
 console.log('Portfolio loaded successfully! 🚀');
