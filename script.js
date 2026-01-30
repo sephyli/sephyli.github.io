@@ -116,7 +116,9 @@ async function fetchGitHubStars() {
                 if (response.ok) {
                     const data = await response.json();
                     const stars = data.stargazers_count;
-                    starsSpan.textContent = stars >= 1000 ? (stars / 1000).toFixed(1) + 'k' : stars;
+                    const formattedStars = stars >= 1000 ? (stars / 1000).toFixed(1) + 'k' : stars;
+                    starsSpan.innerHTML = `<i class="fas fa-star"></i>${formattedStars}`;
+                    starsSpan.classList.add('loaded');
                 }
             } catch (error) {
                 console.log(`Could not fetch stars for ${repo}`);

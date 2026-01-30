@@ -875,19 +875,24 @@ body {
 
 /* GitHub Stars */
 .github-stars {
-    display: inline-flex;
+    display: none;
     align-items: center;
-    gap: 0.25rem;
-    margin-left: 0.25rem;
-    font-size: 0.75rem;
-    color: #f59e0b;
+    margin-left: 0.35rem;
+    padding: 0.15rem 0.4rem;
+    background: rgba(245, 158, 11, 0.15);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fbbf24;
 }
 
-.github-stars::before {
-    content: '\f005';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    font-size: 0.65rem;
+.github-stars.loaded {
+    display: inline-flex;
+}
+
+.github-stars i {
+    margin-right: 0.25rem;
+    font-size: 0.6rem;
 }
 
 .venue-type {
