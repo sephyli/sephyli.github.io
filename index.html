@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tianyu Li | PhD Researcher in Autonomous Driving</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-text">TL</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#service">Service</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="greeting">Hello, I'm</div>
+                <h1 class="name">
+                    <span class="name-en">Tianyu Li</span>
+                    <span class="name-cn">李天羽</span>
+                </h1>
+                <div class="title-wrapper">
+                    <span class="title-prefix">PhD Researcher in</span>
+                    <span class="typed-text"></span>
+                    <span class="cursor">|</span>
+                </div>
+                <p class="hero-description">
+                    Pushing the boundaries of autonomous driving, computer vision, and 3D scene understanding
+                    at <span class="highlight">Fudan University</span> & <span class="highlight">OpenDriveLab</span>
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-target="10">0</span>
+                        <span class="stat-label">Publications</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="1">0</span>
+                        <span class="stat-label">Challenge Wins</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="8">0</span>
+                        <span class="stat-label">Top Venues</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#publications" class="btn btn-primary">
+                        <i class="fas fa-file-alt"></i> View Publications
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Get in Touch
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="orbit-container">
+                    <div class="orbit orbit-1">
+                        <div class="orbit-icon"><i class="fas fa-car"></i></div>
+                    </div>
+                    <div class="orbit orbit-2">
+                        <div class="orbit-icon"><i class="fas fa-brain"></i></div>
+                    </div>
+                    <div class="orbit orbit-3">
+                        <div class="orbit-icon"><i class="fas fa-cube"></i></div>
+                    </div>
+                    <div class="center-element">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">01.</span> About Me
+            </h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I am a PhD student at <strong>Fudan University</strong> and <strong>Shanghai Innovation Institute</strong>,
+                        conducting research at <strong>OpenDriveLab</strong> under the supervision of Prof. Hongyang Li.
+                    </p>
+                    <p>
+                        My research focuses on <em>autonomous driving</em>, <em>lane detection</em>, <em>end-to-end AD systems</em>,
+                        <em>3D reconstruction</em>, and <em>generative models</em>. I'm passionate about developing intelligent
+                        systems that can perceive and understand the world in 3D.
+                    </p>
+                    <p>
+                        Previously, I completed my Bachelor's and Master's degrees at <strong>Beihang University</strong>
+                        and gained valuable research experience at <strong>Sensetime</strong> and <strong>Megvii</strong>.
+                    </p>
+                    <div class="research-interests">
+                        <h3>Research Interests</h3>
+                        <div class="interest-tags">
+                            <span class="tag">Autonomous Driving</span>
+                            <span class="tag">Lane Detection</span>
+                            <span class="tag">End-to-End AD</span>
+                            <span class="tag">3D Reconstruction</span>
+                            <span class="tag">Gaussian Splatting</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Scene Understanding</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-timeline">
+                    <h3>Education</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2024 - Present</span>
+                                <h4>Shanghai Innovation Institute</h4>
+                                <p>PhD Student</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2023 - Present</span>
+                                <h4>Fudan University</h4>
+                                <p>PhD Student, Computer Science</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2016 - 2023</span>
+                                <h4>Beihang University</h4>
+                                <p>Bachelor & Master, Computer Science</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">02.</span> Experience
+            </h2>
+            <div class="experience-grid">
+                <div class="experience-card featured">
+                    <div class="card-header">
+                        <div class="company-logo">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <div class="card-badge">Current</div>
+                    </div>
+                    <h3>PhD Researcher</h3>
+                    <h4>OpenDriveLab</h4>
+                    <span class="period">2022 - Present</span>
+                    <ul class="responsibilities">
+                        <li>Supervised by Prof. Hongyang Li</li>
+                        <li>Researching autonomous driving, lane detection and end-to-end AD</li>
+                        <li>Researching computer vision, 3D reconstruction and generation</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span>PyTorch</span>
+                        <span>CUDA</span>
+                        <span>3DGS</span>
+                        <span>Transformers</span>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <div class="card-header">
+                        <div class="company-logo">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="card-badge achievement">
+                            <i class="fas fa-trophy"></i> 1st Place
+                        </div>
+                    </div>
+                    <h3>Research Intern</h3>
+                    <h4>Sensetime - Fundamental Vision</h4>
+                    <span class="period">2021 - 2022</span>
+                    <ul class="responsibilities">
+                        <li>Researching autonomous driving, 2D/3D detection</li>
+                        <li>Semi-supervised learning for object detection</li>
+                        <li class="highlight-item">
+                            <i class="fas fa-award"></i>
+                            First-place of CVPR 2022 Waymo Open Dataset Challenge - 3D Camera Only Detection
+                        </li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span>Detection</span>
+                        <span>SSL</span>
+                        <span>3D Vision</span>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <div class="card-header">
+                        <div class="company-logo">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                    <h3>Research Intern</h3>
+                    <h4>Megvii - Face Recognition</h4>
+                    <span class="period">2019</span>
+                    <ul class="responsibilities">
+                        <li>Researching face recognition algorithms</li>
+                        <li>Face attribute analysis and detection</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span>Face Recognition</span>
+                        <span>Deep Learning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="publications section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">03.</span> Publications
+            </h2>
+            <div class="publication-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="first">First Author</button>
+                <button class="filter-btn" data-filter="2024">2024-2025</button>
+            </div>
+            <div class="publications-list">
+                <!-- First Author Publications -->
+                <div class="publication-item first 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge iclr">ICLR 2024</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>LaneSegNet: Map Learning with Lane Segment Perception for Autonomous Driving</h3>
+                        <p class="authors"><strong>Tianyu Li</strong>, Peijing Jia, Bangjun Wang, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item first" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge neurips">NeurIPS 2023</span>
+                        <span class="venue-type">Datasets & Benchmarks</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>OpenLane-V2: A Topology Reasoning Benchmark for Unified 3D HD Mapping</h3>
+                        <p class="authors">Huijie Wang*, <strong>Tianyu Li*</strong>, Yang Li, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item first 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge corl">CoRL 2025</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>Pseudo-Simulation for Autonomous Driving</h3>
+                        <p class="authors">Wei Cao*, Marcel Hallgarten*, <strong>Tianyu Li*</strong>, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item first 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge arxiv">arXiv 2025</span>
+                        <span class="venue-type">Under Review</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>MTGS: Multi-Traversal Gaussian Splatting</h3>
+                        <p class="authors"><strong>Tianyu Li</strong>, Yihang Qiu, Zhenhua Wu, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item first" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge arxiv">arXiv 2023</span>
+                        <span class="venue-type">Under Review</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>Graph-based Topology Reasoning for Driving Scenes</h3>
+                        <p class="authors"><strong>Tianyu Li</strong>, Li Chen, Huijie Wang, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Co-author Publications -->
+                <div class="publication-item 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge neurips">NeurIPS 2025</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>TopoPoint: Enhance Topology Reasoning via Endpoint Detection in Autonomous Driving</h3>
+                        <p class="authors">Yanping Fu, Xinyuan Liu, <strong>Tianyu Li</strong>, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge neurips">NeurIPS 2024</span>
+                        <span class="venue-type">Datasets & Benchmarks</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>NAVSIM: Data-Driven Non-Reactive Autonomous Vehicle Simulation and Benchmarking</h3>
+                        <p class="authors">Daniel Dauner, Marcel Hallgarten, <strong>Tianyu Li</strong>, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge cvpr highlight">CVPR 2024</span>
+                        <span class="venue-type">Highlight</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>Generalized Predictive Model for Autonomous Driving</h3>
+                        <p class="authors">Jiazhi Yang, Shenyuan Gao, Yihang Qiu, Li Chen, <strong>Tianyu Li</strong>, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="pub-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge eccv">ECCV 2024</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>Fully Sparse 3D Occupancy Prediction</h3>
+                        <p class="authors">Haisong Liu, Yang Chen, Haiguang Wang, Zetong Yang, <strong>Tianyu Li</strong>, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-item 2024" data-aos="fade-up">
+                    <div class="pub-venue">
+                        <span class="venue-badge eccv">ECCV 2024</span>
+                    </div>
+                    <div class="pub-content">
+                        <h3>Embodied Understanding of Driving Scenarios</h3>
+                        <p class="authors">Yunsong Zhou, Linyan Huang, Qingwen Bu, Jia Zeng, <strong>Tianyu Li</strong>, et al.</p>
+                        <div class="pub-links">
+                            <a href="#" class="pub-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Service Section -->
+    <section id="service" class="service section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">04.</span> Academic Service
+            </h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>Reviewer</h3>
+                    <div class="service-items">
+                        <div class="service-category">
+                            <h4>Journals</h4>
+                            <span class="journal-badge nature">Nature</span>
+                            <span class="journal-badge tpami">IEEE TPAMI</span>
+                        </div>
+                        <div class="service-category">
+                            <h4>Conferences</h4>
+                            <div class="conference-tags">
+                                <span>CVPR</span>
+                                <span>ICCV</span>
+                                <span>ECCV</span>
+                                <span>NeurIPS</span>
+                                <span>ICML</span>
+                                <span>ICLR</span>
+                                <span>AAAI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Organizer</h3>
+                    <div class="service-items">
+                        <div class="challenge-item">
+                            <div class="challenge-year">2025</div>
+                            <div class="challenge-info">
+                                <h4>Autonomous Grand Challenge</h4>
+                                <p>@ ICCV & CVPR 2025</p>
+                            </div>
+                        </div>
+                        <div class="challenge-item">
+                            <div class="challenge-year">2024</div>
+                            <div class="challenge-info">
+                                <h4>Autonomous Grand Challenge</h4>
+                                <p>@ CVPR 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">05.</span> Get In Touch
+            </h2>
+            <div class="contact-content">
+                <p class="contact-description">
+                    I'm always interested in discussing research collaborations, autonomous driving,
+                    3D vision, or any exciting opportunities. Feel free to reach out!
+                </p>
+                <div class="contact-cards">
+                    <a href="mailto:sephy.fine@gmail.com" class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <span>sephy.fine@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/sephyli" target="_blank" class="contact-card">
+                        <i class="fab fa-github"></i>
+                        <span>github.com/sephyli</span>
+                    </a>
+                    <a href="https://scholar.google.com/" target="_blank" class="contact-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Google Scholar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Designed & Built by Tianyu Li</p>
+            <p class="footer-sub">Powered by passion for autonomous driving research</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
