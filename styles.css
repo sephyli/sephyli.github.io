@@ -512,8 +512,6 @@ body {
 .section {
     padding: 6rem 2rem;
     position: relative;
-    z-index: 1;
-    background: var(--bg-primary);
 }
 
 .container {
