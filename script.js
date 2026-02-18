@@ -1,262 +1,268 @@
-// ===== Typing Animation =====
-const typedTextElement = document.querySelector('.typed-text');
-const textArray = ['Autonomous Driving', '3D Reconstruction', 'Computer Vision', 'Gaussian Splatting', 'End-to-End AD'];
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+/* =========================================================
+   LiDAR Noir — script.js
+   Tianyu Li Personal Website
+   ========================================================= */
 
-function type() {
-    const currentText = textArray[textIndex];
+// ===== Canvas Point Cloud Background =====
+(function initCanvas() {
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
 
-    if (isDeleting) {
-        typedTextElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typedTextElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
 
-    let typeSpeed = isDeleting ? 50 : 100;
+    const COUNT = 90;
+    const particles = Array.from({ length: COUNT }, () => ({
+        x:      Math.random() * canvas.width,
+        y:      Math.random() * canvas.height,
+        size:   Math.random() * 1.4 + 0.4,
+        vx:     (Math.random() - 0.5) * 0.18,
+        vy:     (Math.random() - 0.5) * 0.18,
+        alpha:  Math.random() * 0.35 + 0.08,
+        hue:    Math.random() > 0.82 ? 'amber' : (Math.random() > 0.55 ? 'cyan' : 'white'),
+    }));
 
-    if (!isDeleting && charIndex === currentText.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % textArray.length;
-        typeSpeed = 500;
-    }
+    const COLORS = {
+        amber: 'rgba(249,115,22,',
+        cyan:  'rgba(34,211,238,',
+        white: 'rgba(240,244,248,',
+    };
 
-    setTimeout(type, typeSpeed);
-}
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(type, 1000);
-});
+        // Particles
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
 
-// ===== Navbar Scroll Effect =====
-const navbar = document.querySelector('.navbar');
-let lastScrollY = window.scrollY;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = COLORS[p.hue] + p.alpha + ')';
+            ctx.fill();
+        });
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-    lastScrollY = window.scrollY;
-});
-
-// ===== Mobile Navigation Toggle =====
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    navToggle.classList.toggle('active');
-});
-
-// Close mobile menu when clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        navToggle.classList.remove('active');
-    });
-});
-
-// ===== Stats Counter Animation =====
-const stats = document.querySelectorAll('.stat-number');
-let hasAnimated = false;
-
-function animateStats() {
-    stats.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        let current = 0;
-
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                stat.textContent = Math.ceil(current);
-                requestAnimationFrame(updateCounter);
-            } else {
-                stat.textContent = target;
-            }
-        };
-
-        updateCounter();
-    });
-}
-
-// Intersection Observer for stats animation
-const heroSection = document.querySelector('.hero');
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimated) {
-            animateStats();
-            hasAnimated = true;
-        }
-    });
-}, { threshold: 0.5 });
-
-statsObserver.observe(heroSection);
-
-// ===== Fetch GitHub Stars =====
-async function fetchGitHubStars() {
-    const repoLinks = document.querySelectorAll('.pub-link[data-repo]');
-
-    for (const link of repoLinks) {
-        const repo = link.getAttribute('data-repo');
-        const starsSpan = link.querySelector('.github-stars');
-
-        if (repo && starsSpan) {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${repo}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    const stars = data.stargazers_count;
-                    const formattedStars = stars >= 1000 ? (stars / 1000).toFixed(1) + 'k' : stars;
-                    starsSpan.innerHTML = `<i class="fas fa-star"></i>${formattedStars}`;
-                    starsSpan.classList.add('loaded');
+        // Connections — sparse amber mesh
+        for (let i = 0; i < particles.length; i++) {
+            const a = particles[i];
+            for (let j = i + 1; j < particles.length; j++) {
+                const b = particles[j];
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 130) {
+                    const alpha = 0.05 * (1 - dist / 130);
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.strokeStyle = `rgba(249,115,22,${alpha})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
                 }
-            } catch (error) {
-                console.log(`Could not fetch stars for ${repo}`);
             }
         }
+
+        requestAnimationFrame(draw);
     }
-}
 
-// Fetch stars on page load
-document.addEventListener('DOMContentLoaded', fetchGitHubStars);
+    draw();
+})();
 
-// ===== Smooth Scroll for Navigation Links =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+// ===== Custom Cursor =====
+(function initCursor() {
+    const ring = document.querySelector('.cursor-ring');
+    const dot  = document.querySelector('.cursor-dot');
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+    if (isTouchDevice || !ring || !dot) {
+        if (ring) ring.style.display = 'none';
+        if (dot)  dot.style.display  = 'none';
+        document.body.style.cursor = 'auto';
+        return;
+    }
+
+    let mx = -100, my = -100;
+    let rx = -100, ry = -100;
+
+    document.addEventListener('mousemove', e => {
+        mx = e.clientX;
+        my = e.clientY;
+        dot.style.left = mx + 'px';
+        dot.style.top  = my + 'px';
+    }, { passive: true });
+
+    (function animateRing() {
+        rx += (mx - rx) * 0.11;
+        ry += (my - ry) * 0.11;
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+        requestAnimationFrame(animateRing);
+    })();
+
+    // Hover expansion
+    const interactiveSelector = 'a, button, .edu-item, .exp-item, .challenge-entry, .interest-grid span, .conf-list span';
+    document.addEventListener('mouseover', e => {
+        if (e.target.closest(interactiveSelector)) {
+            document.body.classList.add('cursor-hover');
         }
     });
-});
-
-// ===== Scroll Reveal Animation =====
-const revealElements = document.querySelectorAll('.section');
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+    document.addEventListener('mouseout', e => {
+        if (e.target.closest(interactiveSelector)) {
+            document.body.classList.remove('cursor-hover');
         }
     });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-});
+})();
 
-revealElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    revealObserver.observe(el);
-});
+// ===== Typing Animation =====
+(function initTyping() {
+    const el = document.querySelector('.typed-text');
+    if (!el) return;
 
-// Add revealed class styles
-const style = document.createElement('style');
-style.textContent = `
-    .section.revealed {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-`;
-document.head.appendChild(style);
+    const words  = ['Autonomous Driving', '3D Reconstruction', 'Computer Vision', 'Gaussian Splatting'];
+    let wIdx = 0, cIdx = 0, deleting = false;
 
-// ===== Active Navigation Link Highlight =====
-const sections = document.querySelectorAll('section[id]');
+    function tick() {
+        const word = words[wIdx];
 
-window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector('.nav-links a[href*=' + sectionId + ']')?.classList.add('active');
+        if (deleting) {
+            el.textContent = word.substring(0, --cIdx);
         } else {
-            document.querySelector('.nav-links a[href*=' + sectionId + ']')?.classList.remove('active');
+            el.textContent = word.substring(0, ++cIdx);
         }
+
+        let delay = deleting ? 38 : 88;
+
+        if (!deleting && cIdx === word.length) {
+            delay = 2400;
+            deleting = true;
+        } else if (deleting && cIdx === 0) {
+            deleting = false;
+            wIdx = (wIdx + 1) % words.length;
+            delay = 420;
+        }
+
+        setTimeout(tick, delay);
+    }
+
+    setTimeout(tick, 1400);
+})();
+
+// ===== Intersection Observer — section reveal =====
+(function initObserver() {
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+        });
+    }, { threshold: 0.07 });
+
+    document.querySelectorAll('.section').forEach(el => io.observe(el));
+
+    // Hero: make visible right away after a tiny delay
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.classList.add('section');
+        setTimeout(() => hero.classList.add('visible'), 80);
+    }
+})();
+
+// ===== Mobile Menu =====
+(function initMobileMenu() {
+    const hamburger  = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (!hamburger || !mobileMenu) return;
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+        a.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+        });
+    });
+})();
+
+// ===== Active Nav Highlight =====
+(function initActiveNav() {
+    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    function updateActive() {
+        const scrollY = window.scrollY + 120;
+        let activeId  = null;
+
+        sections.forEach(section => {
+            if (scrollY >= section.offsetTop) {
+                activeId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href').replace('#', '');
+            link.classList.toggle('active', href === activeId);
+        });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+})();
+
+// ===== Smooth Scroll =====
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = window.innerWidth > 1024 ? 0 : 64;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
     });
 });
 
-// Add active link style
-const linkStyle = document.createElement('style');
-linkStyle.textContent = `
-    .nav-links a.active {
-        color: var(--accent-primary) !important;
+// ===== GitHub Stars =====
+async function fetchGitHubStars() {
+    const seen = new Map(); // cache repo → stars
+
+    const links = document.querySelectorAll('.pub-link-code[data-repo]');
+
+    for (const link of links) {
+        const repo = link.getAttribute('data-repo');
+        const span = link.querySelector('.gh-stars');
+        if (!repo || !span) continue;
+
+        try {
+            let stars;
+            if (seen.has(repo)) {
+                stars = seen.get(repo);
+            } else {
+                const res = await fetch(`https://api.github.com/repos/${repo}`);
+                if (!res.ok) continue;
+                const data = await res.json();
+                stars = data.stargazers_count;
+                seen.set(repo, stars);
+            }
+
+            const label = stars >= 1000
+                ? `★ ${(stars / 1000).toFixed(1)}k`
+                : `★ ${stars}`;
+            span.textContent = label;
+            span.classList.add('loaded');
+        } catch {
+            /* silently ignore */
+        }
     }
-    .nav-links a.active::after {
-        width: 100%;
-    }
-`;
-document.head.appendChild(linkStyle);
-
-// ===== Device Detection =====
-const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-// ===== Cursor Glow Effect (desktop only) =====
-if (!isTouchDevice) {
-    const cursorGlow = document.createElement('div');
-    cursorGlow.className = 'cursor-glow';
-    cursorGlow.style.cssText = `
-        position: fixed;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-        transform: translate(-50%, -50%);
-        transition: opacity 0.3s ease;
-    `;
-    document.body.appendChild(cursorGlow);
-
-    document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
-    });
 }
 
-// ===== Card Tilt Effect (desktop only) =====
-if (!isTouchDevice) {
-    const cards = document.querySelectorAll('.experience-card, .service-card');
-
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-        });
-    });
-}
-
-console.log('Portfolio loaded successfully! 🚀');
+document.addEventListener('DOMContentLoaded', fetchGitHubStars);
