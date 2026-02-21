@@ -127,7 +127,7 @@
     const el = document.querySelector('.typed-text');
     if (!el) return;
 
-    const words  = ['Autonomous Driving', '3D Reconstruction', 'Computer Vision', 'Gaussian Splatting'];
+    const words  = ['Autonomous Driving', 'Physical AI', '3D Vision'];
     let wIdx = 0, cIdx = 0, deleting = false;
 
     function tick() {

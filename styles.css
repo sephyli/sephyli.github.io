@@ -706,6 +706,7 @@ body.cursor-hover .cursor-ring {
     letter-spacing: 0.04em;
     text-align: center;
     width: fit-content;
+    white-space: nowrap;
 }
 
 .venue-tag.neurips { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; }
@@ -715,6 +716,8 @@ body.cursor-hover .cursor-ring {
 .venue-tag.iclr    { background: linear-gradient(135deg, #3b82f6, #06b6d4); color: #fff; }
 .venue-tag.corl    { background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; }
 .venue-tag.tpami   { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; }
+.venue-tag.scis    { background: linear-gradient(135deg, #0ea5e9, #2563eb); color: #fff; }
+.venue-tag.prcv    { background: linear-gradient(135deg, #14b8a6, #0d9488); color: #fff; }
 .venue-tag.arxiv   { background: var(--bg-3); color: var(--text-3); border: 1px solid var(--border); }
 
 .pub-year {
@@ -1002,7 +1005,7 @@ body.cursor-hover .cursor-ring {
     .about-body    { gap: 2.5rem; }
     .service-cols  { grid-template-columns: 1fr; gap: 2.5rem; }
 
-    .pub-item { grid-template-columns: 72px 1fr; gap: 1.25rem; margin: 0; padding-left: 0; padding-right: 0; }
+    .pub-item { grid-template-columns: 80px 1fr; gap: 1.75rem; margin: 0; padding-left: 0; padding-right: 0; }
 }
 
 @media (max-width: 640px) {
@@ -1015,7 +1018,7 @@ body.cursor-hover .cursor-ring {
     .hero-portrait { width: 100px; height: 100px; }
 
     .pub-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .pub-left { flex-direction: row; align-items: center; flex-wrap: wrap; }
+    .pub-left { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
 
     .contact-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; max-width: 100%; }
     .contact-card { flex-direction: row; padding: 0.6rem 1.1rem; border-radius: 100px; gap: 0.55rem; }
