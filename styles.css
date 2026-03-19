@@ -736,6 +736,10 @@ body.cursor-hover .cursor-ring {
     color: var(--amber);
 }
 
+.project-lead-note {
+    color: var(--cyan);
+}
+
 .pub-right h3 {
     font-size: 0.94rem;
     font-weight: 600;
