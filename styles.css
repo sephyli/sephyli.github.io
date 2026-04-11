@@ -736,6 +736,10 @@ body.cursor-hover .cursor-ring {
     color: var(--amber);
 }
 
+.oral-note {
+    color: #f43f5e;
+}
+
 .project-lead-note {
     color: var(--cyan);
 }
