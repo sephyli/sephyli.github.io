@@ -734,6 +734,7 @@ body.cursor-hover .cursor-ring {
 .venue-tag.scis    { background: linear-gradient(135deg, #0ea5e9, #2563eb); color: #fff; }
 .venue-tag.prcv    { background: linear-gradient(135deg, #14b8a6, #0d9488); color: #fff; }
 .venue-tag.rss     { background: linear-gradient(135deg, #db2777, #7c3aed); color: #fff; }
+.venue-tag.tro     { background: linear-gradient(135deg, #059669, #0d9488); color: #fff; }
 .venue-tag.arxiv   { background: var(--bg-3); color: var(--text-3); border: 1px solid var(--border); }
 
 .pub-year {
